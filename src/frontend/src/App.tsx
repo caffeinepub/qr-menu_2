@@ -1,5 +1,5 @@
 import { Input } from "@/components/ui/input";
-import { Instagram, Search, X } from "lucide-react";
+import { Instagram, Search, Star, X } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { CATEGORIES, type Category, type MenuItem } from "./menuData";
 
@@ -172,7 +172,7 @@ function ItemModal({
         {/* Items list */}
         <div
           className="overflow-y-auto flex-1"
-          style={{ background: "#eef3fb" }}
+          style={{ background: "#eef3fb", paddingBottom: "80px" }}
         >
           <div style={{ padding: "16px" }}>
             {category?.items.map((item, i) => (
@@ -183,54 +183,73 @@ function ItemModal({
                   background: "white",
                   borderRadius: "12px",
                   boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
-                  padding: "20px 20px",
+                  padding: "14px 20px 0px",
                   marginBottom: "10px",
                   display: "flex",
-                  alignItems: "flex-start",
-                  justifyContent: "space-between",
-                  gap: "12px",
+                  flexDirection: "column",
                   animation: "fadeInUp 0.3s ease both",
                   animationDelay: `${i * 40}ms`,
+                  overflow: "hidden",
                 }}
               >
-                <div style={{ flex: 1, minWidth: 0 }}>
-                  <p
-                    style={{
-                      fontWeight: 700,
-                      fontSize: "14px",
-                      color: "#1a1a1a",
-                      margin: 0,
-                    }}
-                  >
-                    {item.name}
-                  </p>
-                  {item.description && (
-                    <p
-                      style={{
-                        fontSize: "12px",
-                        color: "#555",
-                        margin: "3px 0 0",
-                        lineHeight: 1.4,
-                      }}
-                    >
-                      {item.description}
-                    </p>
-                  )}
-                </div>
-                <span
+                {/* Content row: name/desc left, price badge right */}
+                <div
                   style={{
-                    background: "#0B3B8A",
-                    color: "#FFD700",
-                    padding: "3px 10px",
-                    borderRadius: "999px",
-                    fontWeight: 700,
-                    fontSize: "13px",
-                    flexShrink: 0,
-                    marginTop: "1px",
+                    display: "flex",
+                    alignItems: "flex-start",
+                    justifyContent: "space-between",
+                    gap: "12px",
                   }}
                 >
-                  ₹{item.price}
-                </span>
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <p
+                      style={{
+                        fontWeight: 700,
+                        fontSize: "14px",
+                        color: "#1a1a1a",
+                        margin: 0,
+                      }}
+                    >
+                      {item.name}
+                    </p>
+                    {item.description && (
+                      <p
+                        style={{
+                          fontSize: "12px",
+                          color: "#555",
+                          margin: "3px 0 0",
+                          lineHeight: 1.4,
+                        }}
+                      >
+                        {item.description}
+                      </p>
+                    )}
+                  </div>
+                  <span
+                    style={{
+                      background: "#0B3B8A",
+                      color: "#FFD700",
+                      padding: "3px 10px",
+                      borderRadius: "999px",
+                      fontWeight: 700,
+                      fontSize: "13px",
+                      flexShrink: 0,
+                      marginTop: "1px",
+                    }}
+                  >
+                    ₹{item.price}
+                  </span>
+                </div>
+                {/* Brand accent line */}
+                <div
+                  style={{
+                    height: "3px",
+                    backgroundColor: "#FFD700",
+                    width: "100%",
+                    borderRadius: "0 0 12px 12px",
+                    marginTop: "12px",
+                  }}
+                />
               </div>
             ))}
           </div>
@@ -285,18 +304,19 @@ export default function App() {
           boxShadow: "0 10px 30px rgba(0,0,0,0.15)",
           borderRadius: "0 0 12px 12px",
           backgroundColor: "#eef3fb",
+          paddingBottom: "80px",
         }}
       >
         {/* ── COMPACT HEADER ── */}
         <div
           style={{
             background: "#0B3B8A",
-            padding: "12px 16px 14px",
+            padding: "44px 16px 14px",
             position: "relative",
           }}
         >
           {/* PURE VEG badge — top right */}
-          <div className="absolute" style={{ top: "10px", right: "14px" }}>
+          <div className="absolute" style={{ top: "12px", right: "14px" }}>
             <div
               className="flex items-center gap-1 px-2 py-0.5 rounded-full"
               style={{
@@ -323,16 +343,17 @@ export default function App() {
             className="font-extrabold text-center"
             style={{
               fontSize: "30px",
-              color: "#FFD700",
+              color: "#FFFFFF",
+              fontFamily: "Arial Black, Arial, sans-serif",
               lineHeight: 1.1,
               letterSpacing: "-0.5px",
               textShadow:
                 "0 0 18px rgba(255,215,0,0.55), 0 2px 4px rgba(0,0,0,0.3)",
-              paddingRight: "80px",
               marginBottom: "2px",
             }}
           >
-            Rocker's Pizza
+            <span style={{ color: "#FFD700" }}>R</span>ocker's{" "}
+            <span style={{ color: "#FFD700" }}>P</span>izza
           </h1>
 
           {/* Tagline */}
@@ -522,6 +543,59 @@ export default function App() {
           </p>
         </footer>
       </div>
+
+      {/* ── FLOATING REVIEW BUTTON ── */}
+      <a
+        href="https://www.google.com/search?q=Rocker%27s+Pizza+loni"
+        target="_blank"
+        rel="noopener noreferrer"
+        data-ocid="review.floating_button"
+        style={{
+          position: "fixed",
+          bottom: "20px",
+          left: "50%",
+          transform: "translateX(-50%)",
+          zIndex: 60,
+          display: "flex",
+          alignItems: "center",
+          gap: "8px",
+          background: "#FFFFFF",
+          borderRadius: "999px",
+          padding: "11px 22px",
+          boxShadow: "0 4px 20px rgba(0,0,0,0.18), 0 1px 6px rgba(0,0,0,0.10)",
+          textDecoration: "none",
+          animation: "reviewPulse 2.4s ease-in-out infinite",
+          border: "1.5px solid rgba(11,59,138,0.10)",
+          whiteSpace: "nowrap",
+        }}
+      >
+        {/* Google-style G icon */}
+        <span
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "22px",
+            height: "22px",
+            borderRadius: "50%",
+            background: "#0B3B8A",
+            flexShrink: 0,
+          }}
+        >
+          <Star size={12} fill="#FFD700" color="#FFD700" />
+        </span>
+        <span
+          style={{
+            fontWeight: 700,
+            fontSize: "14px",
+            color: "#0B3B8A",
+            letterSpacing: "0.2px",
+          }}
+        >
+          Review on Google
+        </span>
+      </a>
+      {/* ── END FLOATING REVIEW BUTTON ── */}
 
       <ItemModal
         category={activeCategory}
