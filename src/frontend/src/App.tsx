@@ -6,7 +6,6 @@ import {
   MessageCircle,
   Phone,
   Search,
-  UtensilsCrossed,
   X,
 } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -28,20 +27,24 @@ function CategoryCard({
       onClick={() => onClick(category)}
       className="relative w-full overflow-hidden text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
       style={{
-        borderRadius: "18px",
+        borderRadius: "16px",
         boxShadow: "0 4px 16px rgba(0,0,0,0.12)",
-        aspectRatio: "4/3",
-        transition: "transform 0.2s ease, box-shadow 0.2s ease",
+        aspectRatio: "3/2",
+        border: "2px solid rgba(255,215,0,0.0)",
+        transition:
+          "transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease",
       }}
       onMouseEnter={(e) => {
         const el = e.currentTarget as HTMLButtonElement;
         el.style.transform = "scale(1.02)";
         el.style.boxShadow = "0 8px 28px rgba(0,0,0,0.22)";
+        el.style.borderColor = "rgba(255,215,0,0.55)";
       }}
       onMouseLeave={(e) => {
         const el = e.currentTarget as HTMLButtonElement;
         el.style.transform = "scale(1)";
         el.style.boxShadow = "0 4px 16px rgba(0,0,0,0.12)";
+        el.style.borderColor = "rgba(255,215,0,0.0)";
       }}
     >
       <img
@@ -52,7 +55,7 @@ function CategoryCard({
           const el = e.currentTarget as HTMLImageElement;
           el.style.display = "none";
           if (el.parentElement) {
-            el.parentElement.style.background = "#023b8a";
+            el.parentElement.style.background = "#0B3B8A";
           }
         }}
       />
@@ -60,18 +63,28 @@ function CategoryCard({
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.28) 55%, rgba(0,0,0,0) 100%)",
+            "linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.35) 45%, rgba(0,0,0,0.0) 100%)",
         }}
       />
       <div className="absolute bottom-0 left-0 right-0 p-3">
-        <p className="text-white font-bold uppercase tracking-wide text-sm leading-tight">
+        <p
+          className="text-white leading-tight"
+          style={{
+            fontSize: "15px",
+            fontWeight: 800,
+            textTransform: "uppercase",
+            letterSpacing: "1.5px",
+          }}
+        >
           {category.name}
         </p>
         <div
-          className="h-[3px] w-8 mt-1 mb-1.5 rounded-full"
-          style={{ backgroundColor: "#dda40c" }}
+          className="mt-1 mb-1.5 rounded-full"
+          style={{ backgroundColor: "#FFD700", width: "40px", height: "4px" }}
         />
-        <p className="text-white/70 text-xs">{category.timing}</p>
+        {category.timing && (
+          <p className="text-white/70 text-xs">{category.timing}</p>
+        )}
       </div>
     </button>
   );
@@ -137,7 +150,7 @@ function ItemModal({
               const el = e.currentTarget as HTMLImageElement;
               el.style.display = "none";
               if (el.parentElement) {
-                el.parentElement.style.background = "#023b8a";
+                el.parentElement.style.background = "#0B3B8A";
               }
             }}
           />
@@ -154,7 +167,7 @@ function ItemModal({
             </p>
             <div
               className="h-[3px] w-10 mt-1 rounded-full"
-              style={{ backgroundColor: "#dda40c" }}
+              style={{ backgroundColor: "#FFD700" }}
             />
           </div>
           <button
@@ -182,7 +195,7 @@ function ItemModal({
                   background: "white",
                   borderRadius: "12px",
                   boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
-                  padding: "14px 16px",
+                  padding: "20px 20px",
                   marginBottom: "10px",
                   display: "flex",
                   alignItems: "flex-start",
@@ -207,7 +220,7 @@ function ItemModal({
                     <p
                       style={{
                         fontSize: "12px",
-                        color: "#888",
+                        color: "#555",
                         margin: "3px 0 0",
                         lineHeight: 1.4,
                       }}
@@ -218,9 +231,12 @@ function ItemModal({
                 </div>
                 <span
                   style={{
+                    background: "#0B3B8A",
+                    color: "#FFD700",
+                    padding: "3px 10px",
+                    borderRadius: "999px",
                     fontWeight: 700,
-                    fontSize: "14px",
-                    color: "#dda40c",
+                    fontSize: "13px",
                     flexShrink: 0,
                     marginTop: "1px",
                   }}
@@ -245,6 +261,7 @@ type SearchResult = {
 export default function App() {
   const [search, setSearch] = useState("");
   const [activeCategory, setActiveCategory] = useState<Category | null>(null);
+  const [searchFocused, setSearchFocused] = useState(false);
 
   const searchResults = useMemo<SearchResult[]>(() => {
     if (!search.trim()) return [];
@@ -282,215 +299,272 @@ export default function App() {
           backgroundColor: "#eef3fb",
         }}
       >
-        {/* Hero Banner */}
-        <div className="relative" style={{ height: "280px" }}>
-          <img
-            src="/assets/generated/restaurant-banner.dim_1200x400.jpg"
-            alt="Rocker's Pizza restaurant"
-            className="w-full h-full object-cover"
-            onError={(e) => {
-              const el = e.currentTarget as HTMLImageElement;
-              el.style.display = "none";
-              if (el.parentElement) {
-                el.parentElement.style.background = "#023b8a";
-              }
-            }}
-          />
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(to top, rgba(2,59,138,0.92) 0%, rgba(2,59,138,0.45) 55%, rgba(0,0,0,0) 100%)",
-            }}
-          />
-          <div className="absolute bottom-14 left-0 right-0 flex flex-col items-center gap-1.5 px-6">
-            <div className="flex items-start gap-1.5 text-white/90">
-              <MapPin size={13} className="shrink-0 mt-0.5" />
-              <span className="text-xs leading-snug text-center">
-                KH.No.-1423, Shop No.6, Delhi - Saharanpur Rd, behind Hanuman
-                Mandir, Loni, Ghaziabad, UP – 201102
-              </span>
-            </div>
-            <a
-              href="tel:09711564500"
-              data-ocid="header.button"
-              className="flex items-center gap-1.5 text-white/90 hover:text-white transition-colors"
-            >
-              <Phone size={13} className="shrink-0" />
-              <span className="text-xs">097115 64500</span>
-            </a>
-          </div>
-        </div>
-
-        {/* Logo overlap */}
+        {/* ── NEW HEADER ── */}
         <div
-          className="flex justify-center"
-          style={{ marginTop: "-52px", position: "relative", zIndex: 10 }}
+          className="relative px-6 pt-10 pb-6"
+          style={{ background: "#0B3B8A" }}
         >
+          {/* PURE VEG badge */}
           <div
+            className="absolute top-3 right-4 flex items-center gap-1 px-2.5 py-1 rounded-full"
             style={{
-              width: "104px",
-              height: "104px",
-              borderRadius: "50%",
-              background: "white",
-              border: "3px solid #023b8a",
-              boxShadow: "0 4px 20px rgba(0,0,0,0.18)",
-              overflow: "hidden",
+              background: "#FFFFFF",
+              boxShadow: "0 2px 8px rgba(0,0,0,0.18)",
             }}
           >
-            <img
-              src="/assets/generated/restaurant-logo-transparent.dim_200x200.png"
-              alt="Rocker's Pizza logo"
-              className="w-full h-full object-cover"
-              onError={(e) => {
-                const el = e.currentTarget as HTMLImageElement;
-                el.style.display = "none";
-                if (el.parentElement) {
-                  el.parentElement.style.background = "#023b8a";
-                }
+            <span
+              style={{
+                fontSize: "10px",
+                fontWeight: 800,
+                color: "#00A859",
+                letterSpacing: "0.5px",
+                lineHeight: 1,
               }}
-            />
+            >
+              PURE VEG 🟩
+            </span>
           </div>
-        </div>
 
-        {/* Info — primary blue background */}
-        <div
-          className="text-center px-6 pt-3 pb-5"
-          style={{ background: "#023b8a" }}
-        >
+          {/* Restaurant name — glowing storefront sign */}
           <h1
-            className="font-extrabold"
+            className="font-extrabold text-center"
             style={{
-              fontSize: "28px",
+              fontSize: "36px",
+              color: "#FFD700",
+              lineHeight: 1.1,
               letterSpacing: "-0.5px",
-              color: "#ffffff",
+              textShadow:
+                "0 0 20px rgba(255,215,0,0.6), 0 2px 4px rgba(0,0,0,0.3)",
             }}
           >
             Rocker's Pizza
           </h1>
+
+          {/* Tagline */}
           <p
+            className="text-center font-medium mt-1.5"
             style={{
-              color: "rgba(255,255,255,0.8)",
-              marginTop: "6px",
-              lineHeight: 1.5,
               fontSize: "13px",
+              color: "#FFD700",
+              opacity: 0.9,
+              letterSpacing: "0.3px",
             }}
           >
-            Fast food restaurant serving pizzas, burgers, pasta, snacks, and
-            beverages. Suitable for casual dining, takeaways, and small
-            gatherings.
-          </p>
-          <p className="mt-1 text-xs" style={{ color: "#dda40c" }}>
-            5% GST Extra
+            Fresh Dough · Fresh Ingredients
           </p>
 
-          {/* Business Details */}
+          {/* Golden divider */}
+          <div className="flex justify-center mt-3">
+            <div
+              style={{
+                width: "40px",
+                height: "2px",
+                borderRadius: "2px",
+                background: "#FFD700",
+                opacity: 0.85,
+              }}
+            />
+          </div>
+
+          {/* Address */}
+          <div className="flex items-start justify-center gap-1.5 mt-3 px-2">
+            <MapPin
+              size={12}
+              className="shrink-0 mt-0.5"
+              style={{ color: "#ffffff" }}
+            />
+            <p
+              className="text-center"
+              style={{
+                fontSize: "11.5px",
+                color: "rgba(255,255,255,0.85)",
+                lineHeight: 1.5,
+              }}
+            >
+              KH.No.-1423, Shop No.6, Delhi - Saharanpur Rd, behind Hanuman
+              Mandir, Loni, Ghaziabad, UP – 201102
+            </p>
+          </div>
+
+          {/* Phone — prominent */}
+          <div className="flex justify-center mt-3">
+            <a
+              href="tel:09711564500"
+              data-ocid="header.button"
+              className="flex items-center gap-2 px-4 py-2 rounded-full transition-opacity hover:opacity-80 active:opacity-70"
+              style={{
+                background: "rgba(255,255,255,0.12)",
+                border: "1px solid rgba(255,255,255,0.2)",
+                textDecoration: "none",
+              }}
+            >
+              <Phone size={15} style={{ color: "#FFD700" }} />
+              <span
+                style={{
+                  fontSize: "15px",
+                  fontWeight: 700,
+                  color: "#ffffff",
+                  letterSpacing: "0.3px",
+                }}
+              >
+                097115 64500
+              </span>
+            </a>
+          </div>
+        </div>
+        {/* ── END HEADER ── */}
+
+        {/* ── INFO CARD ── */}
+        <div
+          className="px-4 pb-4"
+          style={{ background: "#0B3B8A", paddingTop: "12px" }}
+        >
           <div
-            className="mt-4 rounded-xl px-4 py-3 flex flex-col gap-2.5 text-left"
             style={{
-              background: "rgba(255,255,255,0.12)",
-              border: "1px solid rgba(255,255,255,0.22)",
+              background: "#ffffff",
+              borderRadius: "14px",
+              padding: "20px 20px",
             }}
           >
-            {/* Opening Time */}
-            <div className="flex items-center gap-2.5">
+            {/* Short description */}
+            <p
+              className="text-center"
+              style={{
+                fontSize: "12px",
+                color: "#222",
+                lineHeight: 1.55,
+                marginBottom: "10px",
+              }}
+            >
+              Fast food restaurant serving pizzas, burgers, pasta, snacks &amp;
+              beverages. Casual dining, takeaways &amp; small gatherings.
+            </p>
+
+            {/* Opening time */}
+            <div
+              className="flex items-center justify-center gap-1.5"
+              style={{ marginBottom: "10px" }}
+            >
               <Clock
                 size={14}
                 className="shrink-0"
-                style={{ color: "#dda40c" }}
+                style={{ color: "#0B3B8A" }}
               />
               <span
-                className="text-xs"
-                style={{ color: "rgba(255,255,255,0.9)" }}
+                style={{
+                  fontSize: "13px",
+                  fontWeight: 600,
+                  color: "#1a1a1a",
+                }}
               >
-                <span className="font-semibold">Opens Daily</span> &nbsp;·&nbsp;
-                11:00 AM onwards
+                Opens Daily &nbsp;·&nbsp; 11:00 AM onwards
               </span>
             </div>
 
-            {/* Services */}
-            <div className="flex items-start gap-2.5">
-              <UtensilsCrossed
-                size={14}
-                className="shrink-0 mt-0.5"
-                style={{ color: "#dda40c" }}
-              />
-              <div className="flex flex-wrap gap-1.5">
-                {["Dine-in", "Takeaway", "Online Ordering"].map((s) => (
-                  <span
-                    key={s}
-                    className="text-xs font-medium px-2 py-0.5 rounded-full"
-                    style={{
-                      background: "rgba(255,255,255,0.18)",
-                      color: "#ffffff",
-                      border: "1px solid rgba(255,255,255,0.3)",
-                    }}
-                  >
-                    {s}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* WhatsApp */}
-            <div className="flex items-center gap-2.5">
-              <MessageCircle
-                size={14}
-                className="shrink-0"
-                style={{ color: "#25D366" }}
-              />
-              <span
-                className="text-xs"
-                style={{ color: "rgba(255,255,255,0.9)" }}
-              >
-                <span className="font-semibold" style={{ color: "#25D366" }}>
-                  WhatsApp
+            {/* Service tags */}
+            <div
+              className="flex items-center justify-center gap-2"
+              style={{ marginBottom: "12px" }}
+            >
+              {["Dine-in", "Takeaway"].map((tag) => (
+                <span
+                  key={tag}
+                  style={{
+                    background: "#e8f0ff",
+                    color: "#0B3B8A",
+                    fontSize: "11.5px",
+                    fontWeight: 600,
+                    padding: "4px 12px",
+                    borderRadius: "999px",
+                    border: "1px solid #c7d9ff",
+                  }}
+                >
+                  {tag}
                 </span>
-                &nbsp;available
-              </span>
+              ))}
+            </div>
+
+            {/* WhatsApp badge */}
+            <div className="flex justify-center">
+              <div
+                className="flex items-center gap-2 px-5 py-2 rounded-full"
+                style={{
+                  background: "#25D366",
+                  boxShadow: "0 3px 10px rgba(37,211,102,0.35)",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  width: "fit-content",
+                }}
+              >
+                <MessageCircle size={16} style={{ color: "#ffffff" }} />
+                <span
+                  style={{
+                    fontSize: "13px",
+                    fontWeight: 700,
+                    color: "#ffffff",
+                    letterSpacing: "0.2px",
+                  }}
+                >
+                  WhatsApp Available
+                </span>
+              </div>
             </div>
           </div>
         </div>
+        {/* ── END INFO CARD ── */}
 
-        {/* Search */}
+        {/* ── SEARCH BAR ── */}
         <div
-          className="px-5"
+          className="px-4"
           style={{
-            background: "#012d6a",
-            paddingTop: "14px",
-            paddingBottom: "14px",
+            background: "#0B3B8A",
+            paddingTop: "12px",
+            paddingBottom: "16px",
           }}
         >
           <div className="relative">
             <Search
-              size={14}
-              className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none"
+              size={16}
+              className="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none"
               style={{ color: "#888" }}
             />
             <Input
               data-ocid="menu.search_input"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
+              onFocus={() => setSearchFocused(true)}
+              onBlur={() => setSearchFocused(false)}
               placeholder="Search menu items..."
-              className="pl-8 rounded-full bg-white text-sm h-9"
-              style={{ border: "1px solid #D9D9D9" }}
+              className="pl-10 rounded-full bg-white text-sm h-11"
+              style={{
+                border: searchFocused
+                  ? "2px solid #FFD700"
+                  : "1.5px solid #D9D9D9",
+                boxShadow: searchFocused
+                  ? "0 0 0 3px rgba(255,215,0,0.15)"
+                  : "none",
+                transition: "border 0.15s ease, box-shadow 0.15s ease",
+                outline: "none",
+              }}
             />
             {search && (
               <button
                 type="button"
                 onClick={() => setSearch("")}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
                 aria-label="Clear search"
               >
-                <X size={14} />
+                <X size={15} />
               </button>
             )}
           </div>
         </div>
+        {/* ── END SEARCH BAR ── */}
 
         {/* Search Results */}
         {search.trim() ? (
-          <div className="px-4 py-5" style={{ background: "#eef3fb" }}>
+          <div className="px-4 py-5" style={{ background: "#f5f7fa" }}>
             {searchResults.length === 0 ? (
               <div
                 data-ocid="menu.empty_state"
@@ -512,7 +586,7 @@ export default function App() {
                     style={{
                       borderBottom:
                         idx < searchResults.length - 1
-                          ? "1px solid rgba(221,164,12,0.2)"
+                          ? "1px solid rgba(255,215,0,0.2)"
                           : "none",
                     }}
                   >
@@ -522,14 +596,14 @@ export default function App() {
                       </p>
                       <p
                         className="text-xs mt-0.5"
-                        style={{ color: "#023b8a" }}
+                        style={{ color: "#0B3B8A" }}
                       >
                         {categoryName}
                       </p>
                     </div>
                     <span
                       className="font-bold shrink-0 mt-0.5 text-sm"
-                      style={{ color: "#dda40c" }}
+                      style={{ color: "#d4a800" }}
                     >
                       ₹{item.price}
                     </span>
@@ -544,7 +618,10 @@ export default function App() {
             {/* Our Menu header bar */}
             <div
               className="px-5 py-3 flex items-center gap-2"
-              style={{ background: "#023b8a" }}
+              style={{
+                background: "#0B3B8A",
+                borderBottom: "4px solid #FFD700",
+              }}
             >
               <span
                 style={{
@@ -563,10 +640,10 @@ export default function App() {
               />
               <div
                 className="h-[2px] w-4 rounded-full"
-                style={{ background: "#dda40c" }}
+                style={{ background: "#FFD700" }}
               />
             </div>
-            <div className="px-4 py-5" style={{ background: "#eef3fb" }}>
+            <div className="px-4 pt-5 pb-8" style={{ background: "#f5f7fa" }}>
               <div className="grid grid-cols-2 gap-3">
                 {CATEGORIES.map((cat, i) => (
                   <CategoryCard
@@ -586,7 +663,7 @@ export default function App() {
           className="mt-auto px-5 py-6"
           style={{
             background: "#eef3fb",
-            borderTop: "1px solid rgba(221,164,12,0.25)",
+            borderTop: "1px solid rgba(255,215,0,0.25)",
           }}
         >
           <div className="flex items-center justify-center gap-4 mb-3">
