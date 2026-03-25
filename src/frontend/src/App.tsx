@@ -2,7 +2,6 @@ import { Input } from "@/components/ui/input";
 import {
   Clock,
   Instagram,
-  MapPin,
   MessageCircle,
   Phone,
   Search,
@@ -366,26 +365,6 @@ export default function App() {
             />
           </div>
 
-          {/* Address */}
-          <div className="flex items-start justify-center gap-1.5 mt-3 px-2">
-            <MapPin
-              size={12}
-              className="shrink-0 mt-0.5"
-              style={{ color: "#ffffff" }}
-            />
-            <p
-              className="text-center"
-              style={{
-                fontSize: "11.5px",
-                color: "rgba(255,255,255,0.85)",
-                lineHeight: 1.5,
-              }}
-            >
-              KH.No.-1423, Shop No.6, Delhi - Saharanpur Rd, behind Hanuman
-              Mandir, Loni, Ghaziabad, UP – 201102
-            </p>
-          </div>
-
           {/* Phone — prominent */}
           <div className="flex justify-center mt-3">
             <a
@@ -426,20 +405,6 @@ export default function App() {
               padding: "20px 20px",
             }}
           >
-            {/* Short description */}
-            <p
-              className="text-center"
-              style={{
-                fontSize: "12px",
-                color: "#222",
-                lineHeight: 1.55,
-                marginBottom: "10px",
-              }}
-            >
-              Fast food restaurant serving pizzas, burgers, pasta, snacks &amp;
-              beverages. Casual dining, takeaways &amp; small gatherings.
-            </p>
-
             {/* Opening time */}
             <div
               className="flex items-center justify-center gap-1.5"
