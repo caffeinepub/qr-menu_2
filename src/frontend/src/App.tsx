@@ -303,25 +303,70 @@ export default function App() {
           className="relative px-6 pt-10 pb-6"
           style={{ background: "#0B3B8A" }}
         >
-          {/* PURE VEG badge */}
-          <div
-            className="absolute top-3 right-4 flex items-center gap-1 px-2.5 py-1 rounded-full"
-            style={{
-              background: "#FFFFFF",
-              boxShadow: "0 2px 8px rgba(0,0,0,0.18)",
-            }}
-          >
-            <span
+          {/* Top-right: PURE VEG badge + contact icon buttons */}
+          <div className="absolute top-3 right-4 flex items-center gap-2">
+            {/* Call icon button */}
+            <a
+              href="tel:09711564500"
+              data-ocid="header.call_button"
+              aria-label="Call us"
+              className="flex items-center justify-center transition-opacity hover:opacity-80 active:opacity-60"
               style={{
-                fontSize: "10px",
-                fontWeight: 800,
-                color: "#00A859",
-                letterSpacing: "0.5px",
-                lineHeight: 1,
+                width: "34px",
+                height: "34px",
+                borderRadius: "50%",
+                background: "rgba(255,255,255,0.15)",
+                border: "1.5px solid rgba(255,255,255,0.35)",
+                boxShadow: "0 2px 8px rgba(0,0,0,0.18)",
+                textDecoration: "none",
+                flexShrink: 0,
               }}
             >
-              PURE VEG 🟩
-            </span>
+              <Phone size={15} style={{ color: "#FFD700" }} />
+            </a>
+
+            {/* WhatsApp icon button */}
+            <a
+              href="https://wa.me/919711564500"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-ocid="header.whatsapp_button"
+              aria-label="WhatsApp us"
+              className="flex items-center justify-center transition-opacity hover:opacity-80 active:opacity-60"
+              style={{
+                width: "34px",
+                height: "34px",
+                borderRadius: "50%",
+                background: "#25D366",
+                border: "1.5px solid rgba(255,255,255,0.3)",
+                boxShadow: "0 2px 8px rgba(37,211,102,0.4)",
+                textDecoration: "none",
+                flexShrink: 0,
+              }}
+            >
+              <MessageCircle size={15} style={{ color: "#ffffff" }} />
+            </a>
+
+            {/* PURE VEG badge */}
+            <div
+              className="flex items-center gap-1 px-2.5 py-1 rounded-full"
+              style={{
+                background: "#FFFFFF",
+                boxShadow: "0 2px 8px rgba(0,0,0,0.18)",
+              }}
+            >
+              <span
+                style={{
+                  fontSize: "10px",
+                  fontWeight: 800,
+                  color: "#00A859",
+                  letterSpacing: "0.5px",
+                  lineHeight: 1,
+                }}
+              >
+                PURE VEG 🟩
+              </span>
+            </div>
           </div>
 
           {/* Restaurant name — glowing storefront sign */}
@@ -364,32 +409,6 @@ export default function App() {
               }}
             />
           </div>
-
-          {/* Phone — prominent */}
-          <div className="flex justify-center mt-3">
-            <a
-              href="tel:09711564500"
-              data-ocid="header.button"
-              className="flex items-center gap-2 px-4 py-2 rounded-full transition-opacity hover:opacity-80 active:opacity-70"
-              style={{
-                background: "rgba(255,255,255,0.12)",
-                border: "1px solid rgba(255,255,255,0.2)",
-                textDecoration: "none",
-              }}
-            >
-              <Phone size={15} style={{ color: "#FFD700" }} />
-              <span
-                style={{
-                  fontSize: "15px",
-                  fontWeight: 700,
-                  color: "#ffffff",
-                  letterSpacing: "0.3px",
-                }}
-              >
-                097115 64500
-              </span>
-            </a>
-          </div>
         </div>
         {/* ── END HEADER ── */}
 
@@ -427,10 +446,7 @@ export default function App() {
             </div>
 
             {/* Service tags */}
-            <div
-              className="flex items-center justify-center gap-2"
-              style={{ marginBottom: "12px" }}
-            >
+            <div className="flex items-center justify-center gap-2">
               {["Dine-in", "Takeaway"].map((tag) => (
                 <span
                   key={tag}
@@ -447,33 +463,6 @@ export default function App() {
                   {tag}
                 </span>
               ))}
-            </div>
-
-            {/* WhatsApp badge */}
-            <div className="flex justify-center">
-              <div
-                className="flex items-center gap-2 px-5 py-2 rounded-full"
-                style={{
-                  background: "#25D366",
-                  boxShadow: "0 3px 10px rgba(37,211,102,0.35)",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  width: "fit-content",
-                }}
-              >
-                <MessageCircle size={16} style={{ color: "#ffffff" }} />
-                <span
-                  style={{
-                    fontSize: "13px",
-                    fontWeight: 700,
-                    color: "#ffffff",
-                    letterSpacing: "0.2px",
-                  }}
-                >
-                  WhatsApp Available
-                </span>
-              </div>
             </div>
           </div>
         </div>
