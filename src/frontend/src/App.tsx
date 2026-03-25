@@ -1,12 +1,5 @@
 import { Input } from "@/components/ui/input";
-import {
-  Clock,
-  Instagram,
-  MessageCircle,
-  Phone,
-  Search,
-  X,
-} from "lucide-react";
+import { Clock, Instagram, Search, X } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { CATEGORIES, type Category, type MenuItem } from "./menuData";
 
@@ -129,7 +122,6 @@ function ItemModal({
       className="fixed inset-0 z-50"
       style={{ backgroundColor: "#eef3fb" }}
     >
-      {/* Constrained inner container matching app width */}
       <div
         className="relative flex flex-col h-full mx-auto"
         style={{
@@ -298,61 +290,21 @@ export default function App() {
           backgroundColor: "#eef3fb",
         }}
       >
-        {/* ── NEW HEADER ── */}
+        {/* ── COMPACT HEADER ── */}
         <div
-          className="relative px-6 pt-10 pb-6"
-          style={{ background: "#0B3B8A" }}
+          style={{
+            background: "#0B3B8A",
+            padding: "12px 16px 14px",
+            position: "relative",
+          }}
         >
-          {/* Top-right: PURE VEG badge + contact icon buttons */}
-          <div className="absolute top-3 right-4 flex items-center gap-2">
-            {/* Call icon button */}
-            <a
-              href="tel:09711564500"
-              data-ocid="header.call_button"
-              aria-label="Call us"
-              className="flex items-center justify-center transition-opacity hover:opacity-80 active:opacity-60"
-              style={{
-                width: "34px",
-                height: "34px",
-                borderRadius: "50%",
-                background: "rgba(255,255,255,0.15)",
-                border: "1.5px solid rgba(255,255,255,0.35)",
-                boxShadow: "0 2px 8px rgba(0,0,0,0.18)",
-                textDecoration: "none",
-                flexShrink: 0,
-              }}
-            >
-              <Phone size={15} style={{ color: "#FFD700" }} />
-            </a>
-
-            {/* WhatsApp icon button */}
-            <a
-              href="https://wa.me/919711564500"
-              target="_blank"
-              rel="noopener noreferrer"
-              data-ocid="header.whatsapp_button"
-              aria-label="WhatsApp us"
-              className="flex items-center justify-center transition-opacity hover:opacity-80 active:opacity-60"
-              style={{
-                width: "34px",
-                height: "34px",
-                borderRadius: "50%",
-                background: "#25D366",
-                border: "1.5px solid rgba(255,255,255,0.3)",
-                boxShadow: "0 2px 8px rgba(37,211,102,0.4)",
-                textDecoration: "none",
-                flexShrink: 0,
-              }}
-            >
-              <MessageCircle size={15} style={{ color: "#ffffff" }} />
-            </a>
-
-            {/* PURE VEG badge */}
+          {/* PURE VEG badge — top right */}
+          <div className="absolute" style={{ top: "10px", right: "14px" }}>
             <div
-              className="flex items-center gap-1 px-2.5 py-1 rounded-full"
+              className="flex items-center gap-1 px-2 py-0.5 rounded-full"
               style={{
                 background: "#FFFFFF",
-                boxShadow: "0 2px 8px rgba(0,0,0,0.18)",
+                boxShadow: "0 2px 6px rgba(0,0,0,0.18)",
               }}
             >
               <span
@@ -369,16 +321,18 @@ export default function App() {
             </div>
           </div>
 
-          {/* Restaurant name — glowing storefront sign */}
+          {/* Brand name */}
           <h1
             className="font-extrabold text-center"
             style={{
-              fontSize: "36px",
+              fontSize: "30px",
               color: "#FFD700",
               lineHeight: 1.1,
               letterSpacing: "-0.5px",
               textShadow:
-                "0 0 20px rgba(255,215,0,0.6), 0 2px 4px rgba(0,0,0,0.3)",
+                "0 0 18px rgba(255,215,0,0.55), 0 2px 4px rgba(0,0,0,0.3)",
+              paddingRight: "80px", // keep clear of badge
+              marginBottom: "2px",
             }}
           >
             Rocker's Pizza
@@ -386,101 +340,23 @@ export default function App() {
 
           {/* Tagline */}
           <p
-            className="text-center font-medium mt-1.5"
+            className="text-center font-medium"
             style={{
-              fontSize: "13px",
+              fontSize: "12px",
               color: "#FFD700",
-              opacity: 0.9,
+              opacity: 0.88,
               letterSpacing: "0.3px",
+              marginBottom: "10px",
             }}
           >
             Fresh Dough · Fresh Ingredients
           </p>
 
-          {/* Golden divider */}
-          <div className="flex justify-center mt-3">
-            <div
-              style={{
-                width: "40px",
-                height: "2px",
-                borderRadius: "2px",
-                background: "#FFD700",
-                opacity: 0.85,
-              }}
-            />
-          </div>
-        </div>
-        {/* ── END HEADER ── */}
-
-        {/* ── INFO CARD ── */}
-        <div
-          className="px-4 pb-4"
-          style={{ background: "#0B3B8A", paddingTop: "12px" }}
-        >
-          <div
-            style={{
-              background: "#ffffff",
-              borderRadius: "14px",
-              padding: "20px 20px",
-            }}
-          >
-            {/* Opening time */}
-            <div
-              className="flex items-center justify-center gap-1.5"
-              style={{ marginBottom: "10px" }}
-            >
-              <Clock
-                size={14}
-                className="shrink-0"
-                style={{ color: "#0B3B8A" }}
-              />
-              <span
-                style={{
-                  fontSize: "13px",
-                  fontWeight: 600,
-                  color: "#1a1a1a",
-                }}
-              >
-                Opens Daily &nbsp;·&nbsp; 11:00 AM onwards
-              </span>
-            </div>
-
-            {/* Service tags */}
-            <div className="flex items-center justify-center gap-2">
-              {["Dine-in", "Takeaway"].map((tag) => (
-                <span
-                  key={tag}
-                  style={{
-                    background: "#e8f0ff",
-                    color: "#0B3B8A",
-                    fontSize: "11.5px",
-                    fontWeight: 600,
-                    padding: "4px 12px",
-                    borderRadius: "999px",
-                    border: "1px solid #c7d9ff",
-                  }}
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-        {/* ── END INFO CARD ── */}
-
-        {/* ── SEARCH BAR ── */}
-        <div
-          className="px-4"
-          style={{
-            background: "#0B3B8A",
-            paddingTop: "12px",
-            paddingBottom: "16px",
-          }}
-        >
+          {/* Search bar */}
           <div className="relative">
             <Search
-              size={16}
-              className="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none"
+              size={15}
+              className="absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none"
               style={{ color: "#888" }}
             />
             <Input
@@ -490,13 +366,13 @@ export default function App() {
               onFocus={() => setSearchFocused(true)}
               onBlur={() => setSearchFocused(false)}
               placeholder="Search menu items..."
-              className="pl-10 rounded-full bg-white text-sm h-11"
+              className="pl-9 rounded-full bg-white text-sm h-10"
               style={{
                 border: searchFocused
                   ? "2px solid #FFD700"
                   : "1.5px solid #D9D9D9",
                 boxShadow: searchFocused
-                  ? "0 0 0 3px rgba(255,215,0,0.15)"
+                  ? "0 0 0 3px rgba(255,215,0,0.18)"
                   : "none",
                 transition: "border 0.15s ease, box-shadow 0.15s ease",
                 outline: "none",
@@ -506,15 +382,52 @@ export default function App() {
               <button
                 type="button"
                 onClick={() => setSearch("")}
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
                 aria-label="Clear search"
               >
-                <X size={15} />
+                <X size={14} />
               </button>
             )}
           </div>
         </div>
-        {/* ── END SEARCH BAR ── */}
+        {/* ── END COMPACT HEADER ── */}
+
+        {/* ── INFO STRIP (outside blue header) ── */}
+        <div
+          className="px-4 py-3 flex items-center justify-center gap-3 flex-wrap"
+          style={{
+            background: "#f0f5ff",
+            borderBottom: "1px solid #dce9ff",
+          }}
+        >
+          <div className="flex items-center gap-1.5">
+            <Clock size={13} style={{ color: "#0B3B8A" }} />
+            <span
+              style={{ fontSize: "12px", fontWeight: 600, color: "#1a1a1a" }}
+            >
+              Opens Daily · 11:00 AM onwards
+            </span>
+          </div>
+          <div className="flex items-center gap-1.5">
+            {["Dine-in", "Takeaway"].map((tag) => (
+              <span
+                key={tag}
+                style={{
+                  background: "#e8f0ff",
+                  color: "#0B3B8A",
+                  fontSize: "11px",
+                  fontWeight: 600,
+                  padding: "2px 10px",
+                  borderRadius: "999px",
+                  border: "1px solid #c7d9ff",
+                }}
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+        {/* ── END INFO STRIP ── */}
 
         {/* Search Results */}
         {search.trim() ? (
