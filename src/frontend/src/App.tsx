@@ -1,5 +1,5 @@
 import { Input } from "@/components/ui/input";
-import { Clock, Instagram, Search, X } from "lucide-react";
+import { Instagram, Search, X } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { CATEGORIES, type Category, type MenuItem } from "./menuData";
 
@@ -19,9 +19,9 @@ function CategoryCard({
       onClick={() => onClick(category)}
       className="relative w-full overflow-hidden text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
       style={{
-        borderRadius: "16px",
+        borderRadius: "14px",
         boxShadow: "0 4px 16px rgba(0,0,0,0.12)",
-        aspectRatio: "3/2",
+        height: "120px",
         border: "2px solid rgba(255,215,0,0.0)",
         transition:
           "transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease",
@@ -58,25 +58,22 @@ function CategoryCard({
             "linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.35) 45%, rgba(0,0,0,0.0) 100%)",
         }}
       />
-      <div className="absolute bottom-0 left-0 right-0 p-3">
+      <div className="absolute bottom-0 left-0 right-0 p-2.5">
         <p
           className="text-white leading-tight"
           style={{
-            fontSize: "15px",
+            fontSize: "13px",
             fontWeight: 800,
             textTransform: "uppercase",
-            letterSpacing: "1.5px",
+            letterSpacing: "1.2px",
           }}
         >
           {category.name}
         </p>
         <div
-          className="mt-1 mb-1.5 rounded-full"
-          style={{ backgroundColor: "#FFD700", width: "40px", height: "4px" }}
+          className="mt-1 mb-1 rounded-full"
+          style={{ backgroundColor: "#FFD700", width: "32px", height: "3px" }}
         />
-        {category.timing && (
-          <p className="text-white/70 text-xs">{category.timing}</p>
-        )}
       </div>
     </button>
   );
@@ -331,7 +328,7 @@ export default function App() {
               letterSpacing: "-0.5px",
               textShadow:
                 "0 0 18px rgba(255,215,0,0.55), 0 2px 4px rgba(0,0,0,0.3)",
-              paddingRight: "80px", // keep clear of badge
+              paddingRight: "80px",
               marginBottom: "2px",
             }}
           >
@@ -392,43 +389,6 @@ export default function App() {
         </div>
         {/* ── END COMPACT HEADER ── */}
 
-        {/* ── INFO STRIP (outside blue header) ── */}
-        <div
-          className="px-4 py-3 flex items-center justify-center gap-3 flex-wrap"
-          style={{
-            background: "#f0f5ff",
-            borderBottom: "1px solid #dce9ff",
-          }}
-        >
-          <div className="flex items-center gap-1.5">
-            <Clock size={13} style={{ color: "#0B3B8A" }} />
-            <span
-              style={{ fontSize: "12px", fontWeight: 600, color: "#1a1a1a" }}
-            >
-              Opens Daily · 11:00 AM onwards
-            </span>
-          </div>
-          <div className="flex items-center gap-1.5">
-            {["Dine-in", "Takeaway"].map((tag) => (
-              <span
-                key={tag}
-                style={{
-                  background: "#e8f0ff",
-                  color: "#0B3B8A",
-                  fontSize: "11px",
-                  fontWeight: 600,
-                  padding: "2px 10px",
-                  borderRadius: "999px",
-                  border: "1px solid #c7d9ff",
-                }}
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-        </div>
-        {/* ── END INFO STRIP ── */}
-
         {/* Search Results */}
         {search.trim() ? (
           <div className="px-4 py-5" style={{ background: "#f5f7fa" }}>
@@ -480,20 +440,20 @@ export default function App() {
             )}
           </div>
         ) : (
-          /* Category Grid */
+          /* Category Grid — starts immediately after search bar */
           <div>
             {/* Our Menu header bar */}
             <div
-              className="px-5 py-3 flex items-center gap-2"
+              className="px-5 py-2 flex items-center gap-2"
               style={{
                 background: "#0B3B8A",
-                borderBottom: "4px solid #FFD700",
+                borderBottom: "3px solid #FFD700",
               }}
             >
               <span
                 style={{
                   fontWeight: 700,
-                  fontSize: "13px",
+                  fontSize: "12px",
                   color: "#ffffff",
                   textTransform: "uppercase",
                   letterSpacing: "1.5px",
@@ -502,16 +462,12 @@ export default function App() {
                 Our Menu
               </span>
               <div
-                className="h-[2px] flex-1 rounded-full"
-                style={{ background: "rgba(255,255,255,0.3)" }}
-              />
-              <div
-                className="h-[2px] w-4 rounded-full"
-                style={{ background: "#FFD700" }}
+                className="h-[1.5px] flex-1 rounded-full"
+                style={{ background: "rgba(255,255,255,0.25)" }}
               />
             </div>
-            <div className="px-4 pt-5 pb-8" style={{ background: "#f5f7fa" }}>
-              <div className="grid grid-cols-2 gap-3">
+            <div className="px-3 pt-3 pb-6" style={{ background: "#f5f7fa" }}>
+              <div className="grid grid-cols-2 gap-2.5">
                 {CATEGORIES.map((cat, i) => (
                   <CategoryCard
                     key={cat.id}
